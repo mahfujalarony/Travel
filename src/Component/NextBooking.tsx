@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'
+
 import { HeartIcon as OutlineHeart } from '@heroicons/react/24/outline'
 import { HeartIcon as SolidHeart } from '@heroicons/react/24/solid'
 
@@ -35,16 +37,19 @@ const NextBooking = () => {
     },
   ];
 
+  useEffect(() => {
+    AOS.init({duration: 5000});
+  }, [])
+
   const [liked, setLiked] = useState(false);
 
   return (
     <section className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 bg-white">
       
-      <motion.div
+      <div
+        data-aos="fade-up"
         className="flex flex-col w-full lg:w-[50%] space-y-8 md:space-y-12"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+
       >
         <div className="text-center lg:text-left">
           <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-600">
@@ -56,12 +61,10 @@ const NextBooking = () => {
           </h1>
         </div>
         {data.map((d, index) => (
-          <motion.div
+          <div
             key={d.id}
             className="flex items-start space-x-4 md:space-x-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
+
           >
             <img
               src={d.url}
@@ -76,16 +79,14 @@ const NextBooking = () => {
                 {d.description}
               </p>
             </div>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
 
     
-      <motion.div
+      <div
         className="relative w-full lg:w-[45%] mt-12 lg:mt-0 bg-white rounded-xl shadow-2xl overflow-hidden"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        data-aos="fade-left"
       >
         <img
           src="./Rectangle 17.jpg"
@@ -138,7 +139,7 @@ const NextBooking = () => {
              </button>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

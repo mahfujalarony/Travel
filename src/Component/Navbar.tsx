@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const Navbar = () => {
     const [language, setLanguage] = useState<string>('English');
@@ -15,6 +16,11 @@ const Navbar = () => {
     };
 
     const navigate = useNavigate();
+
+    const closeNavbarAndNavigate = ( path: string ) => {
+        navigate(path);
+        toggleSidebar();
+    } 
 
     return (
         <div className='sticky top-0 z-50'>
@@ -86,13 +92,14 @@ const Navbar = () => {
             >
                 <div className="flex justify-between items-center p-4 border-b">
                     <h2 className="text-xl font-semibold">Menu</h2>
-                    <button onClick={toggleSidebar}>
-                        <img src="./xmark-solid.svg" className="w-6" alt="Close" />
-                    </button>
+                    
+                        <AiOutlineClose onClick={toggleSidebar} className="text-2xl cursor-pointer" />
+                      
+                    
                 </div>
                 <ul className="flex flex-col p-4 space-y-4">
                     <li className="px-4 py-2 hover:bg-slate-100 rounded-lg active:bg-slate-200 active:scale-95"
-                    onClick={() => navigate('/')}
+                    onClick={() => closeNavbarAndNavigate('/')}
                     >
                         Destinations
                     </li>
@@ -106,12 +113,12 @@ const Navbar = () => {
                         Bookings
                     </li>
                     <li className="px-4 py-2 hover:bg-slate-100 rounded-lg active:bg-slate-200 active:scale-95"
-                    onClick={() => navigate('/login')}
+                    onClick={() => closeNavbarAndNavigate('/login')}
                     >
                         Login
                     </li>
                     <li className="border-2 px-4 py-2 rounded-lg border-black hover:bg-slate-100 active:bg-slate-200 active:scale-95"
-                    onClick={() => navigate('/signup')}
+                    onClick={() => closeNavbarAndNavigate('/signup')}
                     >
                         Sign Up
                     </li>

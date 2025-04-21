@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { easeInOut } from 'framer-motion';
 
 type Item = {
     id: number;
@@ -35,8 +38,12 @@ const Category = () => {
         },
     ];
 
+    useEffect(() => {
+        AOS.init({ duration: 5000, once: false, easing: 'ease-in-out' });
+    }, []);
+
     return (
-        <div className="flex flex-col items-center py-12 px-4 bg-gray-50">
+        <div data-aos="fade-up"  className="flex flex-col items-center py-12 px-4 bg-gray-50">
             <h1 className="text-lg font-semibold text-gray-500 tracking-wider">CATEGORY</h1>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2 mb-8">We Offer Best Services</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full">
@@ -44,6 +51,7 @@ const Category = () => {
                     <div
                         key={d.id}
                         className="flex flex-col items-center bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
+                        
                     >
                         <img
                             src={d.url}

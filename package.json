@@ -13,6 +13,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "aos": "^2.3.4",
     "bootstrap": "^5.3.5",
     "framer-motion": "^12.7.4",
     "react": "^19.1.0",
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/react-icons": "^3.0.0",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",

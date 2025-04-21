@@ -51,7 +51,6 @@ const Testimonials = () => {
 
   return (
     <section className="relative flex flex-col lg:flex-row justify-between items-center min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 bg-gradient-to-b from-gray-50 to-white">
-      {/* বাম সেকশন: হেডার এবং ডট নেভিগেশন */}
       <motion.div
         className="flex flex-col w-full lg:w-[40%] space-y-8 md:space-y-12 text-center lg:text-left"
         initial={{ opacity: 0, x: -50 }}
