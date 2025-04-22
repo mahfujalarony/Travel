@@ -1,9 +1,9 @@
-import { motion } from "framer-motion"; // অ্যানিমেশনের জন্য
+import { motion } from "framer-motion"; 
 
 const Hero = () => {
   return (
     <section className="relative flex flex-col-reverse xl:flex-row items-center justify-between min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 md:py-24 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-      {/* টেক্সট সেকশন */}
+   
       <motion.div
         className="flex flex-col space-y-6 md:space-y-8 lg:space-y-10 xl:max-w-[50%] text-center xl:text-left"
         initial={{ opacity: 0, y: 50 }}
@@ -32,7 +32,6 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* ইমেজ সেকশন */}
       <motion.div
         className="relative mb-12 xl:mb-0 xl:max-w-[45%]"
         initial={{ opacity: 0, scale: 0.8 }}

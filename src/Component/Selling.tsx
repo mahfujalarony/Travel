@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css'
+import React  from 'react';
+import { motion } from 'framer-motion';
+
 
 type Item = {
     id: number;
@@ -10,7 +10,7 @@ type Item = {
     url: string;
 };
 
-const Selling = () => {
+const Selling: React.FC = () => {
     const data: Item[] = [
         {
             id: 1,
@@ -35,18 +35,20 @@ const Selling = () => {
         },
     ];
 
-    useEffect(() => {
-        AOS.init({ duration : 5000 })
-    })
+
 
     return (
         <div data-aos="fade-up" className="flex flex-col items-center py-12 px-4 bg-gray-50">
             <h1 className="text-lg font-semibold text-gray-500 tracking-wider">Top Selling</h1>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2 mb-8">Top Destinations</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
-                {data.map((d) => (
-                    <div
+                {data.map((d, index) => (
+                    <motion.div
                         key={d.id}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index*0.2 }}
+                        viewport={{ once: false, amount: 0.3 }}
                         className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
                     >
                         <img
@@ -61,7 +63,7 @@ const Selling = () => {
                             </div>
                             <p className="text-gray-600 text-sm">{d.duration}</p>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </div>

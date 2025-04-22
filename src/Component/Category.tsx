@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 
 type Item = {
@@ -10,7 +9,7 @@ type Item = {
     url: string;
 };
 
-const Category = () => {
+const Category: React.FC = () => {
     const data: Item[] = [
         {
             id: 1,
@@ -38,19 +37,21 @@ const Category = () => {
         },
     ];
 
-    useEffect(() => {
-        AOS.init({ duration: 5000, once: false, easing: 'ease-in-out' });
-    }, []);
+
 
     return (
-        <div data-aos="fade-up"  className="flex flex-col items-center py-12 px-4 bg-gray-50">
+        <div data-aos="fade-right"  className="flex flex-col items-center py-12 px-4 bg-gray-50">
             <h1 className="text-lg font-semibold text-gray-500 tracking-wider">CATEGORY</h1>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2 mb-8">We Offer Best Services</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full">
-                {data.map((d) => (
-                    <div
+                {data.map((d, index) => (
+                    <motion.div
                         key={d.id}
                         className="flex flex-col items-center bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index*0.2 }}
+                        viewport={{ once: false, amount: 0.3 }}
                         
                     >
                         <img
@@ -60,7 +61,7 @@ const Category = () => {
                         />
                         <h3 className="text-xl font-semibold text-gray-800 mb-2">{d.title}</h3>
                         <p className="text-gray-600 text-center text-sm">{d.description}</p>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </div>

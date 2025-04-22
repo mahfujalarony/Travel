@@ -8,7 +8,7 @@ type Review = {
   location: string;
 };
 
-const Testimonials = () => {
+const Testimonials: React.FC = () => {
   const data: Review[] = [
     {
       id: 1,
@@ -54,8 +54,9 @@ const Testimonials = () => {
       <motion.div
         className="flex flex-col w-full lg:w-[40%] space-y-8 md:space-y-12 text-center lg:text-left"
         initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 2, ease: "easeOut" }}
       >
         <div>
           <p className="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-600">
@@ -89,13 +90,14 @@ const Testimonials = () => {
         </button>
       </motion.div>
 
-      {/* ডান সেকশন: টেস্টিমোনিয়াল কার্ড */}
+      
       <motion.div
         onClick={nextToggle}
         className="relative w-full lg:w-[50%] mt-12 lg:mt-0 bg-white rounded-xl shadow-2xl p-6 md:p-8 cursor-pointer"
         initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 2, ease: "easeOut" }}
       >
         <AnimatePresence mode="wait">
           <motion.div

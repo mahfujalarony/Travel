@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css'
+import React, { useState } from "react";
+import { motion } from 'framer-motion';
 
 import { HeartIcon as OutlineHeart } from '@heroicons/react/24/outline'
 import { HeartIcon as SolidHeart } from '@heroicons/react/24/solid'
@@ -37,9 +36,6 @@ const NextBooking = () => {
     },
   ];
 
-  useEffect(() => {
-    AOS.init({duration: 5000});
-  }, [])
 
   const [liked, setLiked] = useState(false);
 
@@ -47,7 +43,7 @@ const NextBooking = () => {
     <section className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 bg-white">
       
       <div
-        data-aos="fade-up"
+        
         className="flex flex-col w-full lg:w-[50%] space-y-8 md:space-y-12"
 
       >
@@ -61,8 +57,12 @@ const NextBooking = () => {
           </h1>
         </div>
         {data.map((d, index) => (
-          <div
+          <motion.div
             key={d.id}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 2, delay: index * 0.2 }}
+            viewport={{ once: false }}
             className="flex items-start space-x-4 md:space-x-6"
 
           >
@@ -79,14 +79,17 @@ const NextBooking = () => {
                 {d.description}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
     
-      <div
+      <motion.div
         className="relative w-full lg:w-[45%] mt-12 lg:mt-0 bg-white rounded-xl shadow-2xl overflow-hidden"
-        data-aos="fade-left"
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 3 }}
+        viewport={{ once: false }}
       >
         <img
           src="./Rectangle 17.jpg"
@@ -139,7 +142,7 @@ const NextBooking = () => {
              </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
