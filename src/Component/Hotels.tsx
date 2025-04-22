@@ -27,7 +27,7 @@ const hotels = [
   },
   {
     name: 'Urban Oasis Hotel',
-    image: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6', // Updated image URL
+    image: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6',
     description: 'A stylish urban hotel with a relaxing spa and rooftop pool.',
     rating: 4.4,
   },
@@ -65,7 +65,7 @@ const Hotels: React.FC = () => {
                   <span className="text-yellow-500">★</span>
                   <span className="ml-1 text-gray-700">{hotel.rating}/5</span>
                 </div>
-                <a href="#" className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-semibold">Book Now</a>
+                <button href="#" className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-semibold">Book Now</button>
               </div>
             </div>
           ))}
