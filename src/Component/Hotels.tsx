@@ -65,7 +65,7 @@ const Hotels: React.FC = () => {
                   <span className="text-yellow-500">★</span>
                   <span className="ml-1 text-gray-700">{hotel.rating}/5</span>
                 </div>
-                <button href="#" className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-semibold">Book Now</button>
+                <button className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-semibold">Book Now</button>
               </div>
             </div>
           ))}
