@@ -17,8 +17,6 @@ function Home() {
       <NextBooking />
       <Testimoniels />
       <Subscribe />
-    
-
     </div>
   );
 }
