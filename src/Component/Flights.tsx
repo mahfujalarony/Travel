@@ -95,7 +95,7 @@ const Flights: React.FC = () => {
                 <p className="text-gray-600 mb-1">Departure: {flight.departure}</p>
                 <p className="text-gray-600 mb-1">Duration: {flight.duration}</p>
                 <p className="text-green-600 font-semibold mb-2">BDT {flight.price.toLocaleString()}</p>
-                <a href="#" className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-semibold">Book Now</a>
+                <button className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-semibold">Book Now</button>
               </div>
             </motion.div>
           ))}
