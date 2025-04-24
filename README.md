@@ -8,6 +8,12 @@ This is a travel website built using **React.js**, **TypeScript**, **Tailwind CS
 - **Tailwind CSS** for utility-first styling, making it responsive and easy to customize.
 - **Framer Motion** for adding smooth animations, including opacity transitions and other effects.
 
+## 🎬 Demo Video Google Drive
+
+👉 [Click here to watch the demo video on Google Drive](https://drive.google.com/file/d/1ChJRZaQ9A0hB7KjuNuXsYcrFuhMOfZsK/view)
+
+
+
 ## Live Link
 
 Check out the live version of the website [here](https://travels97.netlify.app/).
@@ -36,4 +42,5 @@ To run this project locally, follow the steps below:
    git clone https://github.com/mahfujalarony/Travel.git
    npm install
    npm start
+
 
