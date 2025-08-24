@@ -16,7 +16,7 @@ This is a travel website built using **React.js**, **TypeScript**, **Tailwind CS
 
 ## Live Link
 
-Check out the live version of the website [here](https://travels97.netlify.app/).
+Check out the Live version of the website [here](https://travels97.netlify.app/).
 
 ## Screenshots
 
@@ -42,5 +42,6 @@ To run this project locally, follow the steps below:
    git clone https://github.com/mahfujalarony/Travel.git
    npm install
    npm start
+
 
 
