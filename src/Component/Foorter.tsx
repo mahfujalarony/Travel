@@ -1,73 +1,54 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
-import { SiGoogleplay, SiAppstore } from 'react-icons/si';
-
+import { SiAppstore, SiGoogleplay } from 'react-icons/si';
 
 const Footer: React.FC = () => {
   return (
-    <div className='flex flex-wrap justify-between p-8 bg-gray-100'>
-      {/* Brand Section */}
-      <div className='mb-6 md:mb-0'>
-        <h1 className='text-2xl font-bold text-blue-600'>Jadoo</h1>
-        <p className='text-gray-600 mt-2 max-w-xs'>
-          Book your trip in minute, get full Control for much longer.
-        </p>
-      </div>
-
-      {/* Company Links */}
-      <div className='mb-6 md:mb-0'>
-        <h1 className='text-lg font-semibold mb-3'>Company</h1>
-        <div className='space-y-2'>        
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>About</p>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Careers</p>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Mobile</p>
+    <footer className="border-t border-slate-200 bg-white px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-5">
+        <div className="md:col-span-2">
+          <h2 className="text-2xl font-black text-slate-950">Jadoo Travel</h2>
+          <p className="mt-3 max-w-sm leading-7 text-slate-600">
+            A polished travel booking portfolio project built with React, TypeScript, routing, forms, filters, and responsive UI.
+          </p>
         </div>
-      </div>
 
-      {/* Content Links */}
-      <div className='mb-6 md:mb-0'>
-        <h1 className='text-lg font-semibold mb-3'>Content</h1>
-        <div className='space-y-2'>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Help/FAQ</p>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Press</p>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Affilates</p>
-        </div>
-      </div>
-
-      {/* More Links */}
-      <div className='mb-6 md:mb-0'>
-        <h1 className='text-lg font-semibold mb-3'>More</h1>
-        <div className='space-y-2'>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Airlinefees</p>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Airline</p>
-          <p className='text-gray-600 hover:text-blue-600 cursor-pointer'>Low fare tips</p>
-        </div>
-      </div>
-
-      {/* Social and App Section */}
-      <div>
-        <div className='flex space-x-4 mb-4 text-2xl'>
-        
-          
-          <FaFacebook className='text-gray-600 hover:text-blue-600 cursor-pointer' />
-          <FaInstagram className='text-gray-600 hover:text-blue-600 cursor-pointer' />
-          <FaTwitter className='text-gray-600 hover:text-blue-600 cursor-pointer' />
-        </div>
-        <div>
-          <p className='text-gray-600 mb-2'>Discover Your App</p>
-          <div className='flex space-x-2'>
-            <button className='flex items-center bg-black text-white px-3 py-1 rounded'>
-              <SiGoogleplay className='mr-1' />
-              Play Store
-            </button>
-            <button className='flex items-center bg-black text-white px-3 py-1 rounded'>
-              <SiAppstore className='mr-1' />
-              App Store
-            </button>
+        {[
+          { title: 'Company', links: ['About', 'Careers', 'Mobile'] },
+          { title: 'Support', links: ['Help Center', 'Press', 'Partners'] },
+          { title: 'Travel', links: ['Airline fees', 'Airline', 'Low fare tips'] },
+        ].map((group) => (
+          <div key={group.title}>
+            <h3 className="font-black text-slate-950">{group.title}</h3>
+            <div className="mt-3 space-y-2">
+              {group.links.map((link) => (
+                <button key={link} className="block text-sm font-semibold text-slate-600 hover:text-slate-950">
+                  {link}
+                </button>
+              ))}
+            </div>
           </div>
+        ))}
+      </div>
+
+      <div className="mx-auto mt-10 flex max-w-7xl flex-col justify-between gap-5 border-t border-slate-200 pt-6 sm:flex-row sm:items-center">
+        <div className="flex gap-3 text-xl text-slate-600">
+          <button aria-label="Facebook" className="hover:text-slate-950"><FaFacebook /></button>
+          <button aria-label="Instagram" className="hover:text-slate-950"><FaInstagram /></button>
+          <button aria-label="Twitter" className="hover:text-slate-950"><FaTwitter /></button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-3 py-2 text-sm font-bold text-white">
+            <SiGoogleplay />
+            Play Store
+          </button>
+          <button className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-3 py-2 text-sm font-bold text-white">
+            <SiAppstore />
+            App Store
+          </button>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

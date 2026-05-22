@@ -1,129 +1,94 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { getAssetPath } from "../utils/asset";
 
 type Review = {
   id: number;
   url: string;
   description: string;
+  name: string;
   location: string;
 };
 
+const data: Review[] = [
+  {
+    id: 1,
+    url: getAssetPath("download (1).jpg"),
+    description: "Everything felt organized from the first search to the final confirmation.",
+    name: "Sarah Lee",
+    location: "Paris, France",
+  },
+  {
+    id: 2,
+    url: getAssetPath("images.jpg"),
+    description: "The interface made it easy to compare stays and keep the booking details clear.",
+    name: "Arif Rahman",
+    location: "Tokyo, Japan",
+  },
+  {
+    id: 3,
+    url: getAssetPath("download.jpg"),
+    description: "A smooth travel planning experience with the right amount of detail.",
+    name: "Maya Carter",
+    location: "New York, USA",
+  },
+];
+
 const Testimonials: React.FC = () => {
-  const data: Review[] = [
-    {
-      id: 1,
-      url: "./download (1).jpg",
-      description:
-        "An incredible experience! The service was top-notch, and the destinations were breathtaking. Highly recommend!",
-      location: "Paris, France",
-    },
-    {
-      id: 2,
-      url: "./images.jpg",
-      description:
-        "Traveling with this agency was seamless and enjoyable. Everything was perfectly organized!",
-      location: "Tokyo, Japan",
-    },
-    {
-      id: 3,
-      url: "./download.jpg",
-      description:
-        "A trip of a lifetime! The team made sure every detail was perfect. Will book again!",
-      location: "New York, USA",
-    },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextToggle = () => {
-    setCurrentIndex((prev) => (prev === data.length - 1 ? 0 : prev + 1));
-  };
-
-  // const prevToggle = () => {
-  //   setCurrentIndex((prev) => (prev === 0 ? data.length - 1 : prev - 1));
-  // };
-
-  const goToTestimonial = (index: number) => {
-    setCurrentIndex(index);
-  };
-
   const currentTestimonial = data[currentIndex];
 
+  const move = (direction: number) => {
+    setCurrentIndex((prev) => (prev + direction + data.length) % data.length);
+  };
+
   return (
-    <section className="relative flex flex-col lg:flex-row justify-between items-center min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 bg-gradient-to-b from-gray-50 to-white">
-      <motion.div
-        className="flex flex-col w-full lg:w-[40%] space-y-8 md:space-y-12 text-center lg:text-left"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 2, ease: "easeOut" }}
-      >
+    <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1fr] lg:items-center">
         <div>
-          <p className="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-600">
-            TESTIMONIALS
-          </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-800 leading-tight mt-2">
-            What People Say <br className="hidden lg:inline" />
-            About Us
-          </h1>
+          <p className="text-sm font-black uppercase tracking-wider text-amber-600">Testimonials</p>
+          <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-4xl">What travelers say</h2>
+          <div className="mt-6 flex gap-3">
+            <button onClick={() => move(-1)} className="grid h-11 w-11 place-items-center rounded-md border border-slate-300 text-slate-700 hover:bg-slate-50" aria-label="Previous testimonial">
+              <FiArrowLeft />
+            </button>
+            <button onClick={() => move(1)} className="grid h-11 w-11 place-items-center rounded-md bg-slate-950 text-white hover:bg-slate-800" aria-label="Next testimonial">
+              <FiArrowRight />
+            </button>
+          </div>
         </div>
-        <button
-          onClick={nextToggle}
-          className="hover:cursor-pointer focus:outline-none"
-        >
-          <motion.div
-            className="flex space-x-3 justify-center lg:justify-start"
-            whileHover={{ scale: 1.1 }}
-          >
-            {data.map((_, index) => (
-              <motion.div
-                key={index}
-                className={`w-3 h-3 rounded-full ${
-                  currentIndex === index ? "bg-indigo-600" : "bg-gray-300"
-                }`}
-                onClick={() => goToTestimonial(index)}
-                whileHover={{ scale: 1.3 }}
-                transition={{ duration: 0.3 }}
+
+        <div className="rounded-md border border-slate-200 bg-slate-50 p-5 sm:p-8">
+          <AnimatePresence mode="wait">
+            <motion.article
+              key={currentTestimonial.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="flex flex-col gap-5 sm:flex-row sm:items-start"
+            >
+              <img className="h-20 w-20 rounded-md object-cover" src={currentTestimonial.url} alt={currentTestimonial.name} />
+              <div>
+                <p className="text-xl font-semibold leading-8 text-slate-800">"{currentTestimonial.description}"</p>
+                <p className="mt-5 font-black text-slate-950">{currentTestimonial.name}</p>
+                <p className="text-sm font-semibold text-slate-500">{currentTestimonial.location}</p>
+              </div>
+            </motion.article>
+          </AnimatePresence>
+          <div className="mt-6 flex gap-2">
+            {data.map((review, index) => (
+              <button
+                key={review.id}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2.5 rounded-full transition-all ${currentIndex === index ? "w-8 bg-slate-950" : "w-2.5 bg-slate-300"}`}
+                aria-label={`Show testimonial ${index + 1}`}
               />
             ))}
-          </motion.div>
-        </button>
-      </motion.div>
-
-      
-      <motion.div
-        onClick={nextToggle}
-        className="relative w-full lg:w-[50%] mt-12 lg:mt-0 bg-white rounded-xl shadow-2xl p-6 md:p-8 cursor-pointer"
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 2, ease: "easeOut" }}
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentTestimonial.id}
-            className="flex items-start space-x-4 md:space-x-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          >
-            <img
-              className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover"
-              src={currentTestimonial.url}
-              alt={`Testimonial from ${currentTestimonial.location}`}
-            />
-            <div className="flex flex-col space-y-4">
-              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                "{currentTestimonial.description}"
-              </p>
-              <p className="text-sm md:text-base font-semibold text-indigo-600">
-                {currentTestimonial.location}
-              </p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

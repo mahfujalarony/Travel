@@ -1,72 +1,93 @@
-import React  from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-
+import { useNavigate } from 'react-router-dom';
+import { FiArrowRight, FiMapPin } from 'react-icons/fi';
+import { getAssetPath } from '../utils/asset';
 
 type Item = {
     id: number;
     location: string;
-    view: string;
+    price: string;
     duration: string;
     url: string;
 };
 
 const Selling: React.FC = () => {
+    const navigate = useNavigate();
     const data: Item[] = [
         {
             id: 1,
-            location: 'Rome, Italty',
-            view: '$5.42k',
+            location: 'Rome, Italy',
+            price: '$5.42k',
             duration: '10 Days Trip',
-            url: './Rectangle 14.png',
+            url: getAssetPath('Rectangle 14.png'),
         },
         {
             id: 2,
             location: 'London, UK',
-            view: '$4.2k',
+            price: '$4.2k',
             duration: '12 Days Trip',
-            url: './Rectangle 14.jpg',
+            url: getAssetPath('Rectangle 14.jpg'),
         },
         {
             id: 3,
             location: 'Full Europe',
-            view: '$15k',
+            price: '$15k',
             duration: '28 Days Trip',
-            url: './Rectangle 14 (1).png',
+            url: getAssetPath('Rectangle 14 (1).png'),
         },
     ];
 
-
-
     return (
-        <div data-aos="fade-up" className="flex flex-col items-center py-12 px-4 bg-gray-50">
-            <h1 className="text-lg font-semibold text-gray-500 tracking-wider">Top Selling</h1>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2 mb-8">Top Destinations</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
-                {data.map((d, index) => (
-                    <motion.div
-                        key={d.id}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: index*0.2 }}
-                        viewport={{ once: false, amount: 0.3 }}
-                        className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+                <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+                    <div>
+                        <p className="text-sm font-black uppercase tracking-wider text-amber-600">Top Selling</p>
+                        <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-4xl">Curated destinations</h2>
+                    </div>
+                    <button
+                        onClick={() => navigate('/bookings')}
+                        className="inline-flex w-fit items-center gap-2 rounded-md border border-slate-300 px-4 py-3 font-bold text-slate-800 hover:bg-slate-50"
                     >
-                        <img
-                            src={d.url}
-                            alt={d.location}
-                            className="w-full h-48 object-cover"
-                        />
-                        <div className="p-4">
-                            <div className="flex justify-between items-center mb-2">
-                                <h3 className="text-lg font-semibold text-gray-800">{d.location}</h3>
-                                <p className="text-yellow-500 font-bold">{d.view}</p>
+                        Build itinerary
+                        <FiArrowRight />
+                    </button>
+                </div>
+                <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+                    {data.map((d, index) => (
+                        <motion.article
+                            key={d.id}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.45, delay: index * 0.08 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm"
+                        >
+                            <img src={d.url} alt={d.location} className="h-64 w-full object-cover" />
+                            <div className="p-5">
+                                <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                        <h3 className="text-xl font-black text-slate-950">{d.location}</h3>
+                                        <p className="mt-2 inline-flex items-center gap-2 text-sm text-slate-600">
+                                            <FiMapPin className="text-rose-600" />
+                                            {d.duration}
+                                        </p>
+                                    </div>
+                                    <p className="rounded-md bg-emerald-50 px-3 py-2 font-black text-emerald-700">{d.price}</p>
+                                </div>
+                                <button
+                                    onClick={() => navigate('/bookings')}
+                                    className="mt-5 w-full rounded-md bg-slate-950 px-4 py-3 font-bold text-white hover:bg-slate-800"
+                                >
+                                    Reserve Package
+                                </button>
                             </div>
-                            <p className="text-gray-600 text-sm">{d.duration}</p>
-                        </div>
-                    </motion.div>
-                ))}
+                        </motion.article>
+                    ))}
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

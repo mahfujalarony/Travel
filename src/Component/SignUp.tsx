@@ -1,79 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiCheckCircle, FiUserPlus } from 'react-icons/fi';
 
 const SignUp: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match. Please check both fields.');
+      return;
+    }
+    setMessage('Demo account created successfully. This is ready for backend integration.');
+  };
+
+  const success = message.startsWith('Demo');
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Create Account</h2>
+    <main className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-5xl overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm lg:grid-cols-[0.85fr_1fr]">
+        <section className="bg-slate-950 p-8 text-white sm:p-10">
+          <p className="text-sm font-black uppercase tracking-wider text-amber-400">Get Started</p>
+          <h1 className="mt-3 text-3xl font-black">Create a traveler account</h1>
+          <p className="mt-4 leading-7 text-slate-300">Validation, error states, and confirmation messages make this feel like a real product instead of a static page.</p>
+        </section>
 
-        <div className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-              Name
+        <form onSubmit={handleSubmit} className="p-6 sm:p-10">
+          <div className="space-y-5">
+            <label className="block">
+              <span className="mb-2 block text-sm font-bold text-slate-700">Name</span>
+              <input className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200" placeholder="Your name" required />
             </label>
-            <input
-              id="name"
-              type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Enter your name"
-            />
+            <label className="block">
+              <span className="mb-2 block text-sm font-bold text-slate-700">Email</span>
+              <input type="email" className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200" placeholder="you@example.com" required />
+            </label>
+            <div className="grid gap-5 md:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block text-sm font-bold text-slate-700">Password</span>
+                <input type="password" minLength={6} value={password} onChange={(event) => setPassword(event.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200" required />
+              </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-bold text-slate-700">Confirm Password</span>
+                <input type="password" minLength={6} value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200" required />
+              </label>
+            </div>
+            <button className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-amber-500 px-5 py-3 font-black text-slate-950 hover:bg-amber-400">
+              <FiUserPlus />
+              Sign Up
+            </button>
           </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Enter your email"
-            />
-          </div>
+          {message && (
+            <p className={`mt-5 inline-flex gap-2 rounded-md p-4 font-semibold ${success ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'}`}>
+              <FiCheckCircle className="mt-1 shrink-0" />
+              {message}
+            </p>
+          )}
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Enter your password"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700 mb-1">
-              Confirm Password
-            </label>
-            <input
-              id="confirm-password"
-              type="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Confirm your password"
-            />
-          </div>
-
-          <button
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 font-medium"
-          >
-            Sign Up
-          </button>
-        </div>
-
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <p className="text-blue-600 hover:underline"
-          onClick={() => navigate('/login')}
-            >
-            Login
+          <p className="mt-6 text-center text-sm text-slate-600">
+            Already have an account?{' '}
+            <button type="button" className="font-bold text-slate-950 underline" onClick={() => navigate('/login')}>
+              Login
+            </button>
           </p>
-        </p>
+        </form>
       </div>
-    </div>
+    </main>
   );
 };
 

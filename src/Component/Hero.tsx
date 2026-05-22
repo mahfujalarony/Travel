@@ -1,54 +1,93 @@
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { FiArrowRight, FiCalendar, FiMapPin, FiShield } from "react-icons/fi";
+import { getAssetPath } from "../utils/asset";
 
 const Hero = () => {
-  return (
-    <section className="relative flex flex-col-reverse xl:flex-row items-center justify-between min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 md:py-24 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-   
-      <motion.div
-        className="flex flex-col space-y-6 md:space-y-8 lg:space-y-10 xl:max-w-[50%] text-center xl:text-left"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-red-600 tracking-wide">
-          Best Destinations Around the World
-        </h1>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight md:leading-snug text-gray-800">
-          Travel, Enjoy <br className="hidden lg:inline" />
-          and Live a New <br className="hidden lg:inline" />
-          Full Life
-        </h2>
-        <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-md mx-auto xl:mx-0">
-          Discover breathtaking destinations and create unforgettable memories. Let your journey begin with us, exploring the world in style and comfort.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center xl:justify-start">
-          <button className="relative px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105">
-            Find Out More
-          </button>
-          <button className="relative flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold border-2 border-indigo-600 rounded-lg shadow-md hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105">
-            <img src="./y.png" className="w-6 mr-2" alt="Play Icon" />
-            Play Demo
-          </button>
-        </div>
-      </motion.div>
+  const navigate = useNavigate();
 
-      <motion.div
-        className="relative mb-12 xl:mb-0 xl:max-w-[45%]"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-      >
-        <img
-          src="./image.png"
-          className="relative z-10 w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] object-cover rounded-lg shadow-2xl"
-          alt="Travel Destination"
-        />
-        <img
-          src="./Decore.png"
-          className="absolute top-[-150px] sm:top-[-200px] right-[-50px] sm:right-[-100px] md:right-[-150px] lg:right-[-200px] w-[200px] sm:w-[300px] md:w-[400px] lg:w-[500px] z-0 opacity-50"
-          alt="Decorative Element"
-        />
-      </motion.div>
+  return (
+    <section className="bg-white">
+      <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl grid-cols-1 items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8 lg:py-16">
+        <motion.div
+          className="max-w-2xl"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <p className="mb-4 inline-flex items-center gap-2 rounded-md bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-700">
+            <FiShield />
+            Trusted travel planning from Bangladesh
+          </p>
+          <h1 className="text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            Plan flights, hotels, and bookings in one polished travel dashboard.
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
+            Jadoo Travel is a professional portfolio project with searchable trip inventory, responsive booking flows, and production-ready user feedback.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <button
+              onClick={() => navigate("/bookings")}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 font-bold text-white shadow-sm hover:bg-slate-800"
+            >
+              Start Booking
+              <FiArrowRight />
+            </button>
+            <button
+              onClick={() => navigate("/flights")}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 px-5 py-3 font-bold text-slate-800 hover:bg-slate-50"
+            >
+              View Flights
+            </button>
+          </div>
+          <div className="mt-10 grid grid-cols-3 gap-3 border-t border-slate-200 pt-6">
+            <div>
+              <p className="text-2xl font-black text-slate-950">18+</p>
+              <p className="text-sm text-slate-500">Routes</p>
+            </div>
+            <div>
+              <p className="text-2xl font-black text-slate-950">4.8</p>
+              <p className="text-sm text-slate-500">Rating</p>
+            </div>
+            <div>
+              <p className="text-2xl font-black text-slate-950">24/7</p>
+              <p className="text-sm text-slate-500">Support</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="relative"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        >
+          <img
+            src={getAssetPath("Image.png")}
+            className="h-[360px] w-full rounded-md object-cover shadow-2xl sm:h-[520px]"
+            alt="Traveler planning a journey"
+          />
+          <div className="absolute bottom-4 left-4 right-4 rounded-md border border-white/60 bg-white/95 p-4 shadow-xl sm:left-auto sm:w-80">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-bold text-slate-500">Recommended trip</p>
+                <p className="text-lg font-black text-slate-950">Dhaka to Istanbul</p>
+              </div>
+              <span className="rounded-md bg-amber-100 px-3 py-2 text-sm font-black text-amber-800">BDT 55k</span>
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-600">
+              <span className="inline-flex items-center gap-2">
+                <FiCalendar className="text-emerald-600" />
+                8h 10m
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <FiMapPin className="text-rose-600" />
+                Direct options
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

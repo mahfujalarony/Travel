@@ -1,55 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiCheckCircle, FiLogIn } from 'react-icons/fi';
 
 const Login: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setMessage('Demo login successful. In a real app this would call an authentication API.');
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Welcome Back</h2>
+    <main className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-5xl overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm lg:grid-cols-[0.85fr_1fr]">
+        <section className="bg-slate-950 p-8 text-white sm:p-10">
+          <p className="text-sm font-black uppercase tracking-wider text-amber-400">Account</p>
+          <h1 className="mt-3 text-3xl font-black">Welcome back to Jadoo Travel</h1>
+          <p className="mt-4 leading-7 text-slate-300">A professional demo should make every action feel intentional, even when there is no backend yet.</p>
+        </section>
 
-        <div className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email
+        <form onSubmit={handleSubmit} className="p-6 sm:p-10">
+          <div className="space-y-5">
+            <label className="block">
+              <span className="mb-2 block text-sm font-bold text-slate-700">Email</span>
+              <input type="email" className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200" placeholder="you@example.com" required />
             </label>
-            <input
-              id="email"
-              type="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Enter your email"
-            />
+            <label className="block">
+              <span className="mb-2 block text-sm font-bold text-slate-700">Password</span>
+              <input type="password" minLength={6} className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200" placeholder="At least 6 characters" required />
+            </label>
+            <button className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 font-black text-white hover:bg-slate-800">
+              <FiLogIn />
+              Login
+            </button>
           </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Enter your password"
-            />
-          </div>
+          {message && (
+            <p className="mt-5 inline-flex gap-2 rounded-md bg-emerald-50 p-4 font-semibold text-emerald-800">
+              <FiCheckCircle className="mt-1 shrink-0" />
+              {message}
+            </p>
+          )}
 
-          <button
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 font-medium"
-          >
-            Login
-          </button>
-        </div>
-
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
-          <p className="text-blue-600 hover:underline"
-          onClick={() => navigate('/signup')}
-          >
-            Sign up
+          <p className="mt-6 text-center text-sm text-slate-600">
+            Do not have an account?{' '}
+            <button type="button" className="font-bold text-slate-950 underline" onClick={() => navigate('/signup')}>
+              Create one
+            </button>
           </p>
-        </p>
+        </form>
       </div>
-    </div>
+    </main>
   );
 };
 

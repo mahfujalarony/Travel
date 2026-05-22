@@ -1,70 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FiCloud, FiCreditCard, FiHeadphones, FiMap } from 'react-icons/fi';
 
-
-type Item = {
+type Service = {
     id: number;
     title: string;
     description: string;
-    url: string;
+    icon: React.ReactNode;
 };
 
 const Category: React.FC = () => {
-    const data: Item[] = [
+    const data: Service[] = [
         {
             id: 1,
-            title: 'Calculated Weather',
-            description: 'Built Wicket longer admire do barton vanity itself do in it.',
-            url: './Group.png',
+            title: 'Smart Trip Search',
+            description: 'Compare flights and stays from curated travel inventory.',
+            icon: <FiCloud />,
         },
         {
             id: 2,
-            title: 'Best Flights',
-            description: 'Engrossed listening. Park gate sell they west hard for the.',
-            url: './Group (1).png',
+            title: 'Flexible Booking',
+            description: 'Switch between hotel and flight booking without losing context.',
+            icon: <FiMap />,
         },
         {
             id: 3,
-            title: 'Local Events',
-            description: 'Barton vanity itself do in it. Preferd to men it engrossed listening.',
-            url: './image 25.png',
+            title: 'Secure Checkout',
+            description: 'Clear booking confirmations and realistic payment-ready flow.',
+            icon: <FiCreditCard />,
         },
         {
             id: 4,
-            title: 'Customization',
-            description: 'We deliver outsourced aviation services for military customers',
-            url: './Group 49.png',
+            title: 'Traveler Support',
+            description: 'Helpful contact points and simple feedback across forms.',
+            icon: <FiHeadphones />,
         },
     ];
 
-
-
     return (
-        <div data-aos="fade-right"  className="flex flex-col items-center py-12 px-4 bg-gray-50">
-            <h1 className="text-lg font-semibold text-gray-500 tracking-wider">CATEGORY</h1>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2 mb-8">We Offer Best Services</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full">
-                {data.map((d, index) => (
-                    <motion.div
-                        key={d.id}
-                        className="flex flex-col items-center bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: index*0.2 }}
-                        viewport={{ once: false, amount: 0.3 }}
-                        
-                    >
-                        <img
-                            src={d.url}
-                            alt={d.title}
-                            className="w-16 h-16 mb-4 object-contain"
-                        />
-                        <h3 className="text-xl font-semibold text-gray-800 mb-2">{d.title}</h3>
-                        <p className="text-gray-600 text-center text-sm">{d.description}</p>
-                    </motion.div>
-                ))}
+        <section className="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+                <div className="max-w-2xl">
+                    <p className="text-sm font-black uppercase tracking-wider text-amber-600">Services</p>
+                    <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-4xl">A booking experience that feels complete</h2>
+                </div>
+                <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    {data.map((service, index) => (
+                        <motion.article
+                            key={service.id}
+                            className="rounded-md border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.45, delay: index * 0.08 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                        >
+                            <div className="grid h-11 w-11 place-items-center rounded-md bg-slate-950 text-xl text-white">
+                                {service.icon}
+                            </div>
+                            <h3 className="mt-5 text-lg font-black text-slate-950">{service.title}</h3>
+                            <p className="mt-3 text-sm leading-6 text-slate-600">{service.description}</p>
+                        </motion.article>
+                    ))}
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 
